@@ -1,0 +1,19 @@
+{
+  "name": "hokipoki-landing",
+  "version": "1.0.0",
+  "description": "HokiPoki Landing Page - Marketing website",
+  "main": "index.html",
+  "scripts": {
+    "serve": "npx http-server . -p 8000"
+  },
+  "keywords": [
+    "landing",
+    "marketing",
+    "website"
+  ],
+  "author": "HokiPoki Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
