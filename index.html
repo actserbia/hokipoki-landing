@@ -1018,9 +1018,7 @@
                         </div>
                         <div class="cf-turnstile"
                              id="turnstile-widget"
-                             data-sitekey="0x4AAAAAAB9xKd4hKsWSGfep"
-                             data-theme="dark"
-                             data-size="compact"></div>
+                             data-sitekey="0x4AAAAAAB9xKd4hKsWSGfep"></div>
                         <button
                             type="submit"
                             class="btn btn-primary"
@@ -1085,11 +1083,6 @@
             }
             if (statusLabel) {
                 statusLabel.textContent = safeTheme === 'light' ? 'LIGHT' : 'DARK';
-            }
-
-            const turnstileWidget = document.getElementById('turnstile-widget');
-            if (turnstileWidget) {
-                turnstileWidget.setAttribute('data-theme', safeTheme === 'light' ? 'light' : 'dark');
             }
 
             const themeMeta = document.querySelector('meta[name="theme-color"]');
