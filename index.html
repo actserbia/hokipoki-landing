@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="config.js"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script>
         (function() {
             const storageKey = 'hokipoki-theme';
@@ -1016,10 +1016,7 @@
                                 onblur="this.style.borderColor='var(--border-color)'"
                             />
                         </div>
-                        <div class="cf-turnstile"
-                             id="turnstile-widget"
-                             data-sitekey="0x4AAAAAAB9xKd4hKsWSGfep"
-                             data-theme="auto"></div>
+                        <div id="turnstile-widget"></div>
                         <button
                             type="submit"
                             class="btn btn-primary"
@@ -1096,16 +1093,51 @@
             }
         };
 
+        // Turnstile widget management
+        let turnstileWidgetId = null;
+
+        function renderTurnstile() {
+            const container = document.getElementById('turnstile-widget');
+            if (!container || !window.turnstile) return;
+
+            // Remove existing widget if any
+            if (turnstileWidgetId !== null) {
+                window.turnstile.remove(turnstileWidgetId);
+                turnstileWidgetId = null;
+            }
+
+            // Get current theme
+            const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+
+            // Render with current theme
+            turnstileWidgetId = window.turnstile.render(container, {
+                sitekey: '0x4AAAAAAB9xKd4hKsWSGfep',
+                theme: currentTheme
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const storedTheme = getStoredTheme();
             const fallbackTheme = document.documentElement.getAttribute('data-theme') || (THEME_MEDIA_QUERY && THEME_MEDIA_QUERY.matches ? 'light' : 'dark');
             applyTheme(storedTheme || fallbackTheme || 'dark');
+
+            // Render Turnstile after a short delay to ensure API is loaded
+            const tryRenderTurnstile = () => {
+                if (window.turnstile) {
+                    renderTurnstile();
+                } else {
+                    setTimeout(tryRenderTurnstile, 100);
+                }
+            };
+            tryRenderTurnstile();
 
             const themeToggleButton = document.getElementById('theme-toggle');
             if (themeToggleButton) {
                 themeToggleButton.addEventListener('click', () => {
                     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
                     applyTheme(isLight ? 'dark' : 'light', { persist: true });
+                    // Re-render Turnstile with new theme
+                    renderTurnstile();
                 });
             }
 
@@ -1113,6 +1145,7 @@
                 const systemThemeListener = (event) => {
                     if (!getStoredTheme()) {
                         applyTheme(event.matches ? 'light' : 'dark');
+                        renderTurnstile();
                     }
                 };
                 if (THEME_MEDIA_QUERY.addEventListener) {
