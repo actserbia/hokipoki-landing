@@ -25,13 +25,39 @@
     <meta name="twitter:description" content="When your AI gets stuck, hop to another. Same terminal, same context, different model.">
     <meta name="twitter:image" content="https://hoki-poki.ai/android-chrome-512x512.png">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R3M4E5ERDF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R3M4E5ERDF');
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="config.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+        (function() {
+            const storageKey = 'hokipoki-theme';
+            let storedTheme = null;
+            try {
+                storedTheme = localStorage.getItem(storageKey);
+            } catch (error) {
+                storedTheme = null;
+            }
+            const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            const theme = storedTheme === 'light' || storedTheme === 'dark'
+                ? storedTheme
+                : (prefersLight ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', theme || 'dark');
+        })();
+    </script>
     <style>
         :root {
+            --transition-speed: 0.35s;
             /* Terminal Colors - Pure black background with neon fluorescent colors */
             --bg-dark: #000000;
             --bg-card: #000000;
@@ -47,6 +73,17 @@
             --neon-red: #ff0000;
         }
 
+        :root[data-theme="light"] {
+            --bg-dark: #f4f6f8;
+            --bg-card: #ffffff;
+            --border-color: #c7ced6;
+            --txt-main: #050505;
+            --txt-muted: #4d4d4d;
+            /* Adjusted neon colors for light theme contrast */
+            --neon-yellow: #b8860b;  /* DarkGoldenrod - readable on light bg */
+            --neon-cyan: #0099aa;    /* Darker cyan for better contrast */
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -60,6 +97,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
 
         main {
@@ -72,7 +110,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1.25rem;
             padding: 2.5rem 0;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -114,6 +154,12 @@
             font-weight: 700;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         nav a {
             color: var(--txt-muted);
             text-decoration: none;
@@ -134,6 +180,98 @@
             color: var(--neon-cyan);
         }
 
+        .theme-toggle {
+            appearance: none;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--txt-main);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            cursor: pointer;
+            position: relative;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .theme-toggle::before,
+        .theme-toggle::after {
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+
+        .theme-toggle::before {
+            content: "[";
+            margin-right: 0.3rem;
+        }
+
+        .theme-toggle::after {
+            content: "]";
+            margin-left: 0.3rem;
+        }
+
+        .theme-toggle .toggle-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+        }
+
+        .theme-toggle .toggle-label span {
+            color: var(--neon-yellow);
+        }
+
+        .toggle-pill {
+            width: 44px;
+            height: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 0 2px;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .toggle-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            transition: transform var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .theme-toggle.is-light::before,
+        .theme-toggle.is-light::after {
+            color: var(--neon-magenta);
+        }
+
+        .theme-toggle.is-light .toggle-label span {
+            color: var(--neon-magenta);
+        }
+
+        .theme-toggle.is-light .toggle-thumb {
+            transform: translateX(20px);
+            background: var(--neon-magenta);
+        }
+
+        .theme-toggle.is-light .toggle-pill {
+            border-color: var(--neon-magenta);
+        }
+
+        .theme-toggle:focus-visible {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+        }
+
+        .theme-toggle.is-light:focus-visible {
+            border-color: var(--neon-magenta);
+            box-shadow: 0 0 0 2px rgba(255, 0, 255, 0.2);
+        }
+
         .cta-buttons {
             display: flex;
             gap: 0.85rem;
@@ -145,7 +283,7 @@
             justify-content: center;
             padding: 0.75rem 1.5rem;
             border: 1px solid;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -227,11 +365,11 @@
             position: relative;
             width: fit-content;
             padding: 1.2rem 1.5rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
             overflow: hidden;
             cursor: pointer;
-            transition: border-color 0.1s;
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .hero-song:hover {
@@ -290,9 +428,9 @@
 
         .info-card {
             padding: 1.5rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            transition: border-color 0.1s;
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .info-card:hover {
@@ -368,8 +506,9 @@
 
         .anthem {
             padding: 3rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .anthem-lyrics {
@@ -381,9 +520,9 @@
 
         .anthem-lyrics li {
             padding: 1.2rem 1.5rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            transition: border-color 0.1s;
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
             cursor: pointer;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -409,10 +548,10 @@
 
         .glass-card {
             padding: 2rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
             position: relative;
-            transition: border-color 0.1s;
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .glass-card:hover {
@@ -436,14 +575,61 @@
 
         .architecture-container {
             padding: 3rem;
-            background: var(--bg-dark);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            transition: border-color 0.1s, background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .architecture-container svg {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Light theme SVG overrides */
+        :root[data-theme="light"] .architecture-container svg rect[fill="#000000"] {
+            fill: var(--bg-card);
+        }
+
+        :root[data-theme="light"] .architecture-container svg text[fill="#808080"] {
+            fill: var(--txt-muted);
+        }
+
+        :root[data-theme="light"] .architecture-container svg text[fill="#ffff00"] {
+            fill: var(--neon-yellow);
+        }
+
+        :root[data-theme="light"] .architecture-container svg rect[stroke="#ffff00"] {
+            stroke: var(--neon-yellow);
+        }
+
+        :root[data-theme="light"] .architecture-container svg path[stroke="#ffff00"] {
+            stroke: var(--neon-yellow);
+        }
+
+        :root[data-theme="light"] .architecture-container svg line[stroke="#ffff00"] {
+            stroke: var(--neon-yellow);
+        }
+
+        :root[data-theme="light"] .architecture-container svg polygon[fill="#ffff00"] {
+            fill: var(--neon-yellow);
+        }
+
+        /* Light theme SVG cyan overrides */
+        :root[data-theme="light"] .architecture-container svg text[fill="#00ffff"] {
+            fill: var(--neon-cyan);
+        }
+
+        :root[data-theme="light"] .architecture-container svg rect[stroke="#00ffff"] {
+            stroke: var(--neon-cyan);
+        }
+
+        :root[data-theme="light"] .architecture-container svg path[stroke="#00ffff"] {
+            stroke: var(--neon-cyan);
+        }
+
+        :root[data-theme="light"] .architecture-container svg polygon[fill="#00ffff"] {
+            fill: var(--neon-cyan);
         }
 
         footer {
@@ -511,6 +697,16 @@
                 align-items: flex-start;
                 gap: 1.5rem;
             }
+            .header-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            .theme-toggle {
+                width: 100%;
+                justify-content: space-between;
+            }
             .cta-buttons {
                 width: 100%;
                 flex-direction: column;
@@ -539,7 +735,15 @@
                 <a href="#use-cases">Use Cases</a>
                 <a href="#architecture">Architecture</a>
             </nav>
-            <span class="tagline">The Model Hop</span>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+                    <span class="toggle-pill" aria-hidden="true">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                    <span class="toggle-label">Theme: <span id="theme-toggle-status">DARK</span></span>
+                </button>
+                <span class="tagline">The Model Hop</span>
+            </div>
         </header>
 
         <section class="hero">
@@ -785,9 +989,9 @@
         </section>
 
         <section class="section" id="waitlist">
-            <div style="max-width: 680px; margin: 0 auto; text-align: center; padding: 3rem 2rem; background: var(--bg-dark); border: 1px solid var(--border-color); position: relative;">
+            <div style="max-width: 680px; margin: 0 auto; text-align: center; padding: 3rem 2rem; background: var(--bg-card); border: 1px solid var(--border-color); position: relative;">
                 <div>
-                    <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--bg-dark); border: 1px solid var(--neon-yellow); margin-bottom: 1.5rem;">
+                    <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--bg-card); border: 1px solid var(--neon-yellow); margin-bottom: 1.5rem;">
                         <span style="font-size: 0.625rem; color: var(--neon-yellow); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">COMING SOON</span>
                     </div>
 
@@ -807,7 +1011,7 @@
                                 id="waitlist-email"
                                 placeholder="your.email@example.com"
                                 required
-                                style="width: 100%; padding: 1rem 1rem 1rem 2.5rem; background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--txt-main); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; outline: none; transition: border-color 0.1s;"
+                                style="width: 100%; padding: 1rem 1rem 1rem 2.5rem; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--txt-main); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; outline: none; transition: border-color 0.1s;"
                                 onfocus="this.style.borderColor='var(--neon-cyan)'"
                                 onblur="this.style.borderColor='var(--border-color)'"
                             />
@@ -846,8 +1050,84 @@
     </footer>
 
     <script>
-        // Set Turnstile site key from config
+        const THEME_STORAGE_KEY = 'hokipoki-theme';
+        const THEME_MEDIA_QUERY = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+
+        const getStoredTheme = () => {
+            try {
+                const saved = localStorage.getItem(THEME_STORAGE_KEY);
+                if (saved === 'light' || saved === 'dark') {
+                    return saved;
+                }
+            } catch (error) {
+                return null;
+            }
+            return null;
+        };
+
+        const setStoredTheme = (theme) => {
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch (error) {
+                // Ignore storage errors
+            }
+        };
+
+        const applyTheme = (theme, { persist = false } = {}) => {
+            const safeTheme = theme === 'light' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', safeTheme);
+
+            const toggleButton = document.getElementById('theme-toggle');
+            const statusLabel = document.getElementById('theme-toggle-status');
+            if (toggleButton) {
+                toggleButton.setAttribute('aria-pressed', safeTheme === 'light');
+                toggleButton.classList.toggle('is-light', safeTheme === 'light');
+            }
+            if (statusLabel) {
+                statusLabel.textContent = safeTheme === 'light' ? 'LIGHT' : 'DARK';
+            }
+
+            const turnstileWidget = document.getElementById('turnstile-widget');
+            if (turnstileWidget) {
+                turnstileWidget.setAttribute('data-theme', safeTheme === 'light' ? 'light' : 'dark');
+            }
+
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeMeta) {
+                themeMeta.setAttribute('content', safeTheme === 'light' ? '#f4f6f8' : '#000000');
+            }
+
+            if (persist) {
+                setStoredTheme(safeTheme);
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
+            const storedTheme = getStoredTheme();
+            const fallbackTheme = document.documentElement.getAttribute('data-theme') || (THEME_MEDIA_QUERY && THEME_MEDIA_QUERY.matches ? 'light' : 'dark');
+            applyTheme(storedTheme || fallbackTheme || 'dark');
+
+            const themeToggleButton = document.getElementById('theme-toggle');
+            if (themeToggleButton) {
+                themeToggleButton.addEventListener('click', () => {
+                    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                    applyTheme(isLight ? 'dark' : 'light', { persist: true });
+                });
+            }
+
+            if (THEME_MEDIA_QUERY) {
+                const systemThemeListener = (event) => {
+                    if (!getStoredTheme()) {
+                        applyTheme(event.matches ? 'light' : 'dark');
+                    }
+                };
+                if (THEME_MEDIA_QUERY.addEventListener) {
+                    THEME_MEDIA_QUERY.addEventListener('change', systemThemeListener);
+                } else if (THEME_MEDIA_QUERY.addListener) {
+                    THEME_MEDIA_QUERY.addListener(systemThemeListener);
+                }
+            }
+
             const turnstileWidget = document.getElementById('turnstile-widget');
             if (turnstileWidget && window.HOKIPOKI_CONFIG) {
                 turnstileWidget.setAttribute('data-sitekey', window.HOKIPOKI_CONFIG.TURNSTILE_SITE_KEY);
