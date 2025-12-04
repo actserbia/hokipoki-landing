@@ -1018,6 +1018,7 @@
                         </div>
                         <div class="cf-turnstile"
                              id="turnstile-widget"
+                             data-sitekey="0x4AAAAAAB9xKd4hKsWSGfep"
                              data-theme="dark"
                              data-size="compact"></div>
                         <button
@@ -1127,10 +1128,6 @@
                 }
             }
 
-            const turnstileWidget = document.getElementById('turnstile-widget');
-            if (turnstileWidget && window.HOKIPOKI_CONFIG) {
-                turnstileWidget.setAttribute('data-sitekey', window.HOKIPOKI_CONFIG.TURNSTILE_SITE_KEY);
-            }
         });
 
         function toggleDance(el) {
