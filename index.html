@@ -631,6 +631,447 @@
             fill: var(--neon-cyan);
         }
 
+        /* Animated Diagram Styles */
+        .diagram-wrapper {
+            width: 100%;
+        }
+
+        .diagram-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .diagram-tab {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--txt-muted);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .diagram-tab::before { content: "["; }
+        .diagram-tab::after { content: "]"; }
+
+        .diagram-tab:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .diagram-tab.active {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .diagram-subtitle {
+            font-size: 0.75rem;
+            color: var(--neon-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .diagram-container {
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .diagram-title-bar {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        .diagram-view {
+            display: none;
+            position: relative;
+            min-height: 380px;
+            padding: 1.5rem;
+        }
+
+        .diagram-view.active {
+            display: block;
+        }
+
+        .diagram-canvas {
+            position: relative;
+            width: 800px;
+            max-width: 100%;
+            height: 300px;
+            margin: 0 auto;
+            overflow: visible;
+        }
+
+        .diagram-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .diagram-node {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .diagram-node.active {
+            opacity: 1;
+            border-color: var(--neon-cyan);
+        }
+
+        .diagram-node.highlight-yellow {
+            border-color: var(--neon-yellow);
+        }
+
+        .diagram-node.highlight-magenta {
+            border-color: var(--neon-magenta);
+        }
+
+        .diagram-node-header {
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--txt-muted);
+            text-align: center;
+        }
+
+        .diagram-node.active .diagram-node-header {
+            color: var(--neon-cyan);
+        }
+
+        .diagram-node.highlight-yellow .diagram-node-header {
+            color: var(--neon-yellow);
+        }
+
+        .diagram-node-body {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.65rem;
+        }
+
+        .diagram-node-status {
+            color: var(--txt-muted);
+        }
+
+        .diagram-node.active .diagram-node-status {
+            color: var(--neon-cyan);
+        }
+
+        .diagram-node-status.status-yellow {
+            color: var(--neon-yellow);
+        }
+
+        .diagram-node-status.status-red {
+            color: var(--neon-red);
+        }
+
+        .diagram-terminal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            font-size: 0.7rem;
+        }
+
+        .diagram-terminal-header {
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .diagram-terminal-body {
+            padding: 0.6rem;
+        }
+
+        .diagram-terminal-line {
+            margin-bottom: 0.25rem;
+        }
+
+        .diagram-terminal-prompt {
+            color: var(--neon-cyan);
+        }
+
+        .diagram-terminal-cmd {
+            color: var(--neon-yellow);
+        }
+
+        .diagram-terminal-arg {
+            color: var(--txt-muted);
+        }
+
+        .diagram-sandbox {
+            border: 1px dashed var(--neon-yellow);
+            padding: 0.5rem;
+        }
+
+        .diagram-sandbox-label {
+            font-size: 0.6rem;
+            color: var(--neon-yellow);
+            margin-bottom: 0.4rem;
+        }
+
+        .diagram-return-label {
+            position: absolute;
+            font-size: 0.65rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--txt-muted);
+        }
+
+        .diagram-return-label.active {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .diagram-diff {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-cyan);
+            font-size: 0.65rem;
+        }
+
+        .diagram-diff-header {
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--neon-cyan);
+        }
+
+        .diagram-diff-body {
+            padding: 0.5rem 0.6rem;
+        }
+
+        .diagram-diff-remove {
+            color: var(--neon-red);
+        }
+
+        .diagram-diff-add {
+            color: var(--neon-cyan);
+        }
+
+        .diagram-diff-actions {
+            display: flex;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.6rem;
+        }
+
+        .diagram-diff-action {
+            flex: 1;
+            padding: 0.4rem;
+            text-align: center;
+            color: var(--neon-cyan);
+        }
+
+        .diagram-diff-action:first-child {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .diagram-diff-action.muted {
+            color: var(--txt-muted);
+        }
+
+        .diagram-step-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .diagram-step-item {
+            padding: 0.4rem 0.6rem;
+            border: 1px solid var(--border-color);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--txt-muted);
+            transition: all 0.2s;
+        }
+
+        .diagram-step-item.active {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .diagram-step-item.completed {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .diagram-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .diagram-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--txt-main);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .diagram-btn::before { content: "["; }
+        .diagram-btn::after { content: "]"; }
+
+        .diagram-btn:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .diagram-btn.btn-primary {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .diagram-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.65rem;
+            color: var(--txt-muted);
+        }
+
+        .diagram-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-legend-box {
+            width: 12px;
+            height: 12px;
+            border: 1px solid;
+        }
+
+        .diagram-legend-box.legend-red {
+            border-color: var(--neon-red);
+        }
+
+        .diagram-legend-box.legend-yellow {
+            border-color: var(--neon-yellow);
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        /* SVG line styles */
+        .diagram-line {
+            stroke: var(--border-color);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .diagram-line.active {
+            stroke: var(--neon-cyan);
+            stroke-width: 2;
+            stroke-dasharray: 6 3;
+            animation: dashFlow 0.5s linear infinite;
+        }
+
+        .diagram-line.completed {
+            stroke: var(--neon-cyan);
+            stroke-width: 1;
+        }
+
+        .diagram-line.return-path {
+            stroke-dasharray: 8 4;
+            opacity: 0;
+        }
+
+        .diagram-line.return-path.active {
+            stroke: var(--neon-cyan);
+            opacity: 1;
+            animation: dashFlowReverse 1.5s ease-out forwards;
+        }
+
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -12; }
+        }
+
+        @keyframes dashFlowReverse {
+            from { stroke-dashoffset: 200; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* Responsive scaling for diagrams - use overflow scroll on mobile */
+        @media (max-width: 850px) {
+            .diagram-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .diagram-view {
+                min-height: auto;
+                padding: 1rem;
+            }
+            .diagram-canvas {
+                min-width: 800px;
+            }
+            .diagram-step-bar {
+                gap: 0.15rem;
+            }
+            .diagram-step-item {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .diagram-step-item {
+                padding: 0.2rem 0.3rem;
+                font-size: 0.5rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .diagram-tabs {
+                gap: 0.3rem;
+            }
+            .diagram-tab {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.55rem;
+            }
+            .diagram-step-item {
+                padding: 0.15rem 0.2rem;
+                font-size: 0.45rem;
+            }
+        }
+
         footer {
             padding: 4rem 0 3rem;
             color: var(--txt-muted);
@@ -925,103 +1366,280 @@
                 <h2>How It Actually Works</h2>
                 <p>Your models. Your team's models. One terminal.</p>
             </div>
-            <div class="architecture-container">
-                <svg width="1000" height="750" viewBox="0 0 1000 750" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <marker id="arrowCyan" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                      <polygon points="0 0, 6 3, 0 6" fill="#00ffff"/>
-                    </marker>
-                    <marker id="arrowMagenta" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                      <polygon points="0 0, 6 3, 0 6" fill="#ff00ff"/>
-                    </marker>
-                    <marker id="arrowYellow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                      <polygon points="0 0, 6 3, 0 6" fill="#ffff00"/>
-                    </marker>
-                  </defs>
+            <div class="diagram-wrapper">
+                <!-- Tab Navigation -->
+                <div class="diagram-tabs">
+                    <button class="diagram-tab active" data-view="ai-to-ai">AI-to-AI</button>
+                    <button class="diagram-tab" data-view="human-terminal">Human Terminal</button>
+                    <button class="diagram-tab" data-view="workspace">Workspace Sharing</button>
+                </div>
 
-                  <!-- Title -->
-                  <text x="500" y="35" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" fill="#00ffff" text-anchor="middle" letter-spacing="2">HOKIPOKI WORKSPACE ARCHITECTURE</text>
+                <!-- Subtitle (dynamic) -->
+                <div class="diagram-subtitle" id="diagram-subtitle">// When Claude gets stuck, hop to Gemini</div>
 
-                  <!-- Security badge -->
-                  <rect x="300" y="60" width="400" height="30" fill="#000000" stroke="#00ffff" stroke-width="1"/>
-                  <text x="500" y="79" font-family="JetBrains Mono, monospace" font-size="11" fill="#00ffff" text-anchor="middle" letter-spacing="1">END-TO-END ENCRYPTED | EPHEMERAL</text>
+                <!-- Diagram Container -->
+                <div class="diagram-container">
+                    <div class="diagram-title-bar" id="diagram-title-bar">AI-to-AI Flow</div>
 
-                  <!-- WORKSPACE (top center) -->
-                  <g id="workspace">
-                    <rect x="325" y="120" width="350" height="120" fill="#000000" stroke="#ffff00" stroke-width="2"/>
-                    <text x="500" y="153" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#ffff00" text-anchor="middle" letter-spacing="1">YOUR WORKSPACE</text>
-                    <text x="500" y="178" font-family="JetBrains Mono, monospace" font-size="12" fill="#808080" text-anchor="middle">Your Private Space</text>
-                    <text x="500" y="203" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">• Invite teammates</text>
-                    <text x="500" y="226" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">• Control access</text>
-                  </g>
+                    <!-- AI-to-AI View -->
+                    <div class="diagram-view active" id="view-ai-to-ai">
+                        <div class="diagram-canvas">
+                            <svg class="diagram-svg" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid meet">
+                                <!-- Forward lines: connect right edge of one node to left edge of next (centered +60px) -->
+                                <line id="ai-line-1" class="diagram-line" x1="160" y1="70" x2="195" y2="70"/>
+                                <polygon id="ai-arrow-1" class="diagram-arrow-head" points="190,65 200,70 190,75" fill="var(--border-color)"/>
+                                <line id="ai-line-2" class="diagram-line" x1="300" y1="70" x2="335" y2="70"/>
+                                <polygon id="ai-arrow-2" class="diagram-arrow-head" points="330,65 340,70 330,75" fill="var(--border-color)"/>
+                                <line id="ai-line-3" class="diagram-line" x1="440" y1="70" x2="475" y2="70"/>
+                                <polygon id="ai-arrow-3" class="diagram-arrow-head" points="470,65 480,70 470,75" fill="var(--border-color)"/>
+                                <line id="ai-line-4" class="diagram-line" x1="580" y1="70" x2="615" y2="70"/>
+                                <polygon id="ai-arrow-4" class="diagram-arrow-head" points="610,65 620,70 610,75" fill="var(--border-color)"/>
+                                <!-- Return path: curves below all nodes -->
+                                <path id="ai-return" class="diagram-line return-path" d="M 720 110 L 720 220 L 60 220 L 60 110" fill="none"/>
+                            </svg>
 
-                  <!-- YOU (left) -->
-                  <g id="you">
-                    <rect x="50" y="290" width="350" height="310" fill="#000000" stroke="#00ffff" stroke-width="2"/>
-                    <text x="225" y="322" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#00ffff" text-anchor="middle" letter-spacing="1">YOU</text>
-                    <text x="225" y="348" font-family="JetBrains Mono, monospace" font-size="12" fill="#808080" text-anchor="middle">Your CLIs</text>
+                            <!-- Nodes: centered in 800px canvas -->
+                            <div class="diagram-node" id="ai-node-0" style="left: 60px; top: 40px; width: 100px;">
+                                <div class="diagram-node-header">Claude Code</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status" id="ai-status-0">> waiting</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ai-node-1" style="left: 200px; top: 40px; width: 100px;">
+                                <div class="diagram-node-header">HokiPoki</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status" id="ai-status-1">> hop</div>
+                                    <div class="diagram-node-status" id="ai-auth-status" style="display: none;">> auth</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ai-node-2" style="left: 340px; top: 40px; width: 100px;">
+                                <div class="diagram-node-header">[Relay]</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status">> routing</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ai-node-3" style="left: 480px; top: 40px; width: 100px;">
+                                <div class="diagram-node-header">Provider</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status">> sandbox</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ai-node-4" style="left: 620px; top: 40px; width: 100px;">
+                                <div class="diagram-node-header">Gemini CLI</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status" id="ai-status-4">> ready</div>
+                                </div>
+                            </div>
 
-                    <!-- Your Models -->
-                    <rect x="80" y="375" width="290" height="205" fill="#000000" stroke="#ff00ff" stroke-width="2" stroke-dasharray="5,5"/>
-                    <text x="225" y="404" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" fill="#ff00ff" text-anchor="middle">YOUR MODELS</text>
-                    <text x="225" y="428" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">Connected CLIs</text>
-                    <text x="225" y="458" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Model A</text>
-                    <text x="225" y="485" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Model B</text>
-                    <text x="225" y="512" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Model C</text>
-                    <text x="225" y="539" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Switch with: hokipoki hop</text>
-                    <text x="225" y="570" font-family="JetBrains Mono, monospace" font-size="10" fill="#ff00ff" text-anchor="middle" font-style="italic">(runs on your machine)</text>
-                  </g>
+                            <!-- Floating labels -->
+                            <div class="diagram-return-label" id="ai-label-request" style="left: 170px; top: 15px; display: none;">[REQUEST]</div>
+                            <div class="diagram-return-label" id="ai-label-patch" style="left: 370px; top: 195px; display: none;">[PATCH]</div>
+                        </div>
 
-                  <!-- TEAMMATE (right) -->
-                  <g id="teammate">
-                    <rect x="600" y="290" width="350" height="310" fill="#000000" stroke="#ff00ff" stroke-width="2"/>
-                    <text x="775" y="322" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#ff00ff" text-anchor="middle" letter-spacing="1">TEAMMATE</text>
-                    <text x="775" y="348" font-family="JetBrains Mono, monospace" font-size="12" fill="#808080" text-anchor="middle">Their CLIs (if invited)</text>
-                    <text x="775" y="395" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Their Model D</text>
-                    <text x="775" y="428" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Their Model E</text>
-                    <text x="775" y="461" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Shared via workspace</text>
-                    <text x="775" y="494" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">> Their APIs stay with them</text>
-                    <text x="775" y="527" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#ff00ff" text-anchor="middle">> You can hop to their models</text>
-                  </g>
+                        <!-- Step bar -->
+                        <div class="diagram-step-bar" id="ai-step-bar">
+                            <div class="diagram-step-item" data-step="0">Stuck</div>
+                            <div class="diagram-step-item" data-step="1">Hop</div>
+                            <div class="diagram-step-item" data-step="2">Auth</div>
+                            <div class="diagram-step-item" data-step="3">Route</div>
+                            <div class="diagram-step-item" data-step="4">Sandbox</div>
+                            <div class="diagram-step-item" data-step="5">Solve</div>
+                            <div class="diagram-step-item" data-step="6">Apply</div>
+                        </div>
+                    </div>
 
-                  <!-- RELAY SERVER (center bottom) -->
-                  <g id="relay">
-                    <rect x="375" y="650" width="250" height="85" fill="#000000" stroke="#00ffff" stroke-width="2"/>
-                    <text x="500" y="680" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" fill="#00ffff" text-anchor="middle" letter-spacing="1">RELAY SERVER</text>
-                    <text x="500" y="704" font-family="JetBrains Mono, monospace" font-size="11" fill="#808080" text-anchor="middle">Routes & Orchestrates</text>
-                    <text x="500" y="726" font-family="JetBrains Mono, monospace" font-size="10" fill="#808080" text-anchor="middle">(The Conductor)</text>
-                  </g>
+                    <!-- Human Terminal View -->
+                    <div class="diagram-view" id="view-human-terminal">
+                        <div class="diagram-canvas" style="height: 320px;">
+                            <svg class="diagram-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
+                                <!-- Vertical flow: Terminal (bottom ~110) → HokiPoki (top 140) → Relay (top 220) (centered +95px) -->
+                                <line id="ht-line-1" class="diagram-line" x1="195" y1="115" x2="195" y2="135"/>
+                                <polygon id="ht-arrow-1" class="diagram-arrow-head" points="190,130 195,140 200,130" fill="var(--border-color)"/>
+                                <line id="ht-line-2" class="diagram-line" x1="195" y1="195" x2="195" y2="215"/>
+                                <polygon id="ht-arrow-2" class="diagram-arrow-head" points="190,210 195,220 200,210" fill="var(--border-color)"/>
+                                <!-- Horizontal from Relay right edge (255) to Sandbox left edge (375) -->
+                                <line id="ht-line-3" class="diagram-line" x1="255" y1="255" x2="370" y2="255"/>
+                                <polygon id="ht-arrow-3" class="diagram-arrow-head" points="365,250 375,255 365,260" fill="var(--border-color)"/>
+                                <!-- From Sandbox right edge (515) to Claude CLI left edge (595) -->
+                                <line id="ht-line-4" class="diagram-line" x1="515" y1="255" x2="590" y2="255"/>
+                                <polygon id="ht-arrow-4" class="diagram-arrow-head" points="585,250 595,255 585,260" fill="var(--border-color)"/>
+                                <!-- Return path: from Claude CLI bottom → below → back to terminal left side -->
+                                <path id="ht-return" class="diagram-line return-path" d="M 705 295 L 705 310 L 105 310 L 105 65 L 115 65" fill="none"/>
+                            </svg>
 
-                  <!-- Arrows and Flow -->
-                  <!-- Workspace invites -->
-                  <path d="M 380 240 L 225 290" stroke="#00ffff" stroke-width="2" fill="none" marker-end="url(#arrowCyan)"/>
-                  <text x="280" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#00ffff">Join</text>
+                            <!-- Terminal: centered +95px -->
+                            <div class="diagram-terminal" id="ht-terminal" style="position: absolute; left: 115px; top: 20px; width: 160px;">
+                                <div class="diagram-terminal-header">Your Terminal</div>
+                                <div class="diagram-terminal-body">
+                                    <div class="diagram-terminal-line"><span class="diagram-terminal-prompt">$</span> <span class="diagram-terminal-cmd">hokipoki request</span></div>
+                                    <div class="diagram-terminal-line"><span class="diagram-terminal-cmd">--tool claude</span></div>
+                                    <div class="diagram-terminal-line"><span class="diagram-terminal-arg">--task "fix bug"</span></div>
+                                    <div class="diagram-terminal-line" id="ht-terminal-result" style="display: none;"><span class="diagram-terminal-prompt">> patch applied!</span></div>
+                                </div>
+                            </div>
 
-                  <!-- Workspace to Teammate -->
-                  <path d="M 620 240 L 775 290" stroke="#00ffff" stroke-width="2" fill="none" marker-end="url(#arrowCyan)"/>
-                  <text x="720" y="260" font-family="JetBrains Mono, monospace" font-size="11" fill="#00ffff">Invite</text>
+                            <!-- HokiPoki node: centered +95px -->
+                            <div class="diagram-node" id="ht-node-1" style="left: 135px; top: 140px; width: 120px;">
+                                <div class="diagram-node-header">HokiPoki</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status">> auth</div>
+                                </div>
+                            </div>
 
-                  <!-- P2P Connection -->
-                  <line x1="400" y1="445" x2="600" y2="445" stroke="#ff00ff" stroke-width="3"/>
-                  <text x="500" y="430" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#ff00ff" text-anchor="middle">P2P EXECUTION</text>
+                            <!-- Relay node: centered +95px -->
+                            <div class="diagram-node" id="ht-node-2" style="left: 135px; top: 220px; width: 120px;">
+                                <div class="diagram-node-header">[Relay]</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status">> routing</div>
+                                </div>
+                            </div>
 
-                  <!-- Model hopping flow -->
-                  <path d="M 400 395 L 600 395" stroke="#ff00ff" stroke-width="2" fill="none" marker-end="url(#arrowMagenta)" stroke-dasharray="5,5"/>
-                  <text x="500" y="380" font-family="JetBrains Mono, monospace" font-size="10" fill="#ff00ff" text-anchor="middle">1. Request model hop</text>
+                            <!-- Sandbox + Provider: centered +95px -->
+                            <div class="diagram-sandbox" id="ht-sandbox" style="position: absolute; left: 375px; top: 220px;">
+                                <div class="diagram-sandbox-label">[SANDBOX]</div>
+                                <div class="diagram-node" id="ht-node-3" style="position: relative; left: 0; top: 0; width: 110px;">
+                                    <div class="diagram-node-header">Provider</div>
+                                    <div class="diagram-node-body">
+                                        <div class="diagram-node-status">> isolated</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                  <!-- Task execution -->
-                  <path d="M 600 485 L 400 485" stroke="#ff00ff" stroke-width="2" fill="none" marker-end="url(#arrowMagenta)"/>
-                  <text x="500" y="506" font-family="JetBrains Mono, monospace" font-size="10" fill="#ff00ff" text-anchor="middle">2. Execute on their model</text>
+                            <!-- Claude CLI: centered +95px -->
+                            <div class="diagram-node" id="ht-node-4" style="left: 595px; top: 230px; width: 110px;">
+                                <div class="diagram-node-header">Claude CLI</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status" id="ht-status-4">> ready</div>
+                                </div>
+                            </div>
 
-                  <!-- Results back -->
-                  <path d="M 400 535 L 600 535" stroke="#ffff00" stroke-width="2" fill="none" marker-end="url(#arrowYellow)"/>
-                  <text x="500" y="556" font-family="JetBrains Mono, monospace" font-size="10" fill="#ffff00" text-anchor="middle">3. Results back</text>
+                            <!-- Diff preview -->
+                            <div class="diagram-diff" id="ht-diff" style="position: absolute; left: 300px; top: 60px; width: 150px; display: none;">
+                                <div class="diagram-diff-header">[DIFF PREVIEW]</div>
+                                <div class="diagram-diff-body">
+                                    <div class="diagram-diff-remove">- old_code()</div>
+                                    <div class="diagram-diff-add">+ fixed_code()</div>
+                                </div>
+                                <div class="diagram-diff-actions">
+                                    <div class="diagram-diff-action">[APPLY]</div>
+                                    <div class="diagram-diff-action muted">[SKIP]</div>
+                                </div>
+                            </div>
+                        </div>
 
-                  <!-- Relay orchestration -->
-                  <path d="M 225 600 L 420 650" stroke="#00ffff" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
-                  <path d="M 775 600 L 580 650" stroke="#00ffff" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
-                  <text x="500" y="630" font-family="JetBrains Mono, monospace" font-size="10" fill="#00ffff" text-anchor="middle">Orchestration</text>
-                </svg>
+                        <!-- Step bar -->
+                        <div class="diagram-step-bar" id="ht-step-bar">
+                            <div class="diagram-step-item" data-step="0">Request</div>
+                            <div class="diagram-step-item" data-step="1">Auth</div>
+                            <div class="diagram-step-item" data-step="2">Route</div>
+                            <div class="diagram-step-item" data-step="3">Sandbox</div>
+                            <div class="diagram-step-item" data-step="4">Process</div>
+                            <div class="diagram-step-item" data-step="5">Return</div>
+                            <div class="diagram-step-item" data-step="6">Apply</div>
+                        </div>
+                    </div>
+
+                    <!-- Workspace Sharing View -->
+                    <div class="diagram-view" id="view-workspace">
+                        <div class="diagram-canvas" style="height: 320px;">
+                            <svg class="diagram-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
+                                <!-- Lines from requesters to relay: connect right edge to left edge (centered +50px) -->
+                                <line id="ws-line-bob" class="diagram-line" x1="180" y1="55" x2="340" y2="145"/>
+                                <line id="ws-line-carol" class="diagram-line" x1="180" y1="135" x2="340" y2="155"/>
+                                <line id="ws-line-dan" class="diagram-line" x1="180" y1="215" x2="340" y2="165"/>
+                                <!-- Lines from relay to providers: connect right edge to left edge -->
+                                <line id="ws-line-alice" class="diagram-line" x1="460" y1="145" x2="570" y2="65"/>
+                                <line id="ws-line-eve" class="diagram-line" x1="460" y1="165" x2="570" y2="185"/>
+                                <!-- Return paths: curve BELOW the diagram (via y=280-300) -->
+                                <path id="ws-return-1" class="diagram-line return-path" d="M 700 90 L 720 90 L 720 285 L 60 285 L 60 55 L 70 55" fill="none"/>
+                                <path id="ws-return-2" class="diagram-line return-path" d="M 700 200 L 730 200 L 730 295 L 55 295 L 55 135 L 70 135" fill="none"/>
+                                <path id="ws-return-3" class="diagram-line return-path" d="M 700 210 L 740 210 L 740 305 L 50 305 L 50 215 L 70 215" fill="none"/>
+                            </svg>
+
+                            <!-- Requesters (left) - centered +50px -->
+                            <div class="diagram-node" id="ws-node-bob" style="left: 70px; top: 30px; width: 110px;">
+                                <div class="diagram-node-header">Bob</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status status-red">no sub</div>
+                                    <div class="diagram-node-status" id="ws-bob-result" style="display: none;">> got it!</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ws-node-carol" style="left: 70px; top: 110px; width: 110px;">
+                                <div class="diagram-node-header">Carol</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status status-red">no sub</div>
+                                    <div class="diagram-node-status" id="ws-carol-result" style="display: none;">> got it!</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node" id="ws-node-dan" style="left: 70px; top: 190px; width: 110px;">
+                                <div class="diagram-node-header">Dan</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status status-red">no sub</div>
+                                    <div class="diagram-node-status" id="ws-dan-result" style="display: none;">> got it!</div>
+                                </div>
+                            </div>
+
+                            <!-- Relay (center) -->
+                            <div class="diagram-node" id="ws-node-relay" style="left: 340px; top: 120px; width: 120px;">
+                                <div class="diagram-node-header">[Relay]</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status" id="ws-relay-status">> conductor</div>
+                                    <div class="diagram-node-status" id="ws-auth-status" style="display: none;">> auth</div>
+                                    <div class="diagram-node-status" style="color: var(--txt-muted);">routes tasks</div>
+                                </div>
+                            </div>
+
+                            <!-- Providers (right) - centered (already at 570) -->
+                            <div class="diagram-node highlight-yellow" id="ws-node-alice" style="left: 570px; top: 30px; width: 130px;">
+                                <div class="diagram-node-header">Alice</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status status-yellow">CLAUDE MAX</div>
+                                    <div class="diagram-node-status" id="ws-alice-status">CLAUDE CLI</div>
+                                </div>
+                            </div>
+                            <div class="diagram-node highlight-yellow" id="ws-node-eve" style="left: 570px; top: 150px; width: 130px;">
+                                <div class="diagram-node-header">Eve</div>
+                                <div class="diagram-node-body">
+                                    <div class="diagram-node-status status-yellow">GEMINI PRO</div>
+                                    <div class="diagram-node-status" id="ws-eve-status">GEMINI CLI</div>
+                                </div>
+                            </div>
+
+                            <!-- Info text -->
+                            <div class="diagram-return-label" id="ws-info" style="left: 280px; top: 5px;">// 3 devs need AI, only 2 have subs</div>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="diagram-legend">
+                            <div class="diagram-legend-item">
+                                <div class="diagram-legend-box legend-red"></div>
+                                <span>no subscription</span>
+                            </div>
+                            <div class="diagram-legend-item">
+                                <div class="diagram-legend-box legend-yellow"></div>
+                                <span>has subscription</span>
+                            </div>
+                        </div>
+
+                        <!-- Step bar -->
+                        <div class="diagram-step-bar" id="ws-step-bar">
+                            <div class="diagram-step-item" data-step="0">Request</div>
+                            <div class="diagram-step-item" data-step="1">Auth</div>
+                            <div class="diagram-step-item" data-step="2">Route</div>
+                            <div class="diagram-step-item" data-step="3">Match</div>
+                            <div class="diagram-step-item" data-step="4">Execute</div>
+                            <div class="diagram-step-item" data-step="5">Return</div>
+                            <div class="diagram-step-item" data-step="6">Success</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="diagram-controls">
+                    <button class="diagram-btn" id="diagram-play-pause">Pause</button>
+                    <button class="diagram-btn" id="diagram-restart">Restart</button>
+                    <button class="diagram-btn btn-primary" id="diagram-next">Next Step ></button>
+                </div>
             </div>
         </section>
 
@@ -1240,6 +1858,388 @@
                 }, 2000);
             });
         }
+
+        // Animated Diagram Controller
+        const diagramState = {
+            currentView: 'ai-to-ai',
+            currentStep: 0,
+            isPlaying: true,
+            intervalId: null,
+            stepDuration: 2000
+        };
+
+        const viewConfigs = {
+            'ai-to-ai': {
+                steps: 7,
+                title: 'AI-to-AI Flow',
+                subtitle: '// When Claude gets stuck, hop to Gemini'
+            },
+            'human-terminal': {
+                steps: 7,
+                title: 'Human Terminal Flow',
+                subtitle: '// Request help from any AI tool'
+            },
+            'workspace': {
+                steps: 7,
+                title: 'Workspace Sharing Flow',
+                subtitle: '// Team shares subscriptions, not credentials'
+            }
+        };
+
+        function initDiagram() {
+            // Setup tabs
+            document.querySelectorAll('.diagram-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchView(tab.dataset.view);
+                });
+            });
+
+            // Setup controls
+            document.getElementById('diagram-play-pause').addEventListener('click', togglePlayPause);
+            document.getElementById('diagram-restart').addEventListener('click', restartAnimation);
+            document.getElementById('diagram-next').addEventListener('click', nextStep);
+
+            // Start animation
+            playStep(0);
+            startAutoPlay();
+        }
+
+        function switchView(viewId) {
+            diagramState.currentView = viewId;
+            diagramState.currentStep = 0;
+
+            // Update tabs
+            document.querySelectorAll('.diagram-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.view === viewId);
+            });
+
+            // Update views
+            document.querySelectorAll('.diagram-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById('view-' + viewId).classList.add('active');
+
+            // Update title and subtitle
+            const config = viewConfigs[viewId];
+            document.getElementById('diagram-title-bar').textContent = config.title;
+            document.getElementById('diagram-subtitle').textContent = config.subtitle;
+
+            // Reset and restart
+            resetAllElements();
+            playStep(0);
+
+            if (diagramState.isPlaying) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        }
+
+        function resetAllElements() {
+            // Reset all nodes
+            document.querySelectorAll('.diagram-node').forEach(node => {
+                node.classList.remove('active', 'completed');
+            });
+            // Reset all lines
+            document.querySelectorAll('.diagram-line').forEach(line => {
+                line.classList.remove('active', 'completed');
+            });
+            // Reset all arrow heads
+            document.querySelectorAll('.diagram-arrow-head').forEach(arrow => {
+                arrow.style.fill = 'var(--border-color)';
+            });
+            // Hide all floating elements
+            document.querySelectorAll('.diagram-return-label').forEach(label => {
+                if (label.id !== 'ws-info') label.style.display = 'none';
+            });
+            // Hide diff preview
+            const diff = document.getElementById('ht-diff');
+            if (diff) diff.style.display = 'none';
+            // Hide terminal result
+            const termResult = document.getElementById('ht-terminal-result');
+            if (termResult) termResult.style.display = 'none';
+            // Hide workspace results
+            ['ws-bob-result', 'ws-carol-result', 'ws-dan-result'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        function playStep(stepIndex) {
+            diagramState.currentStep = stepIndex;
+            const view = diagramState.currentView;
+
+            // Update step bar
+            const stepBar = document.getElementById(view === 'ai-to-ai' ? 'ai-step-bar' : view === 'human-terminal' ? 'ht-step-bar' : 'ws-step-bar');
+            if (stepBar) {
+                stepBar.querySelectorAll('.diagram-step-item').forEach((item, i) => {
+                    item.classList.remove('active', 'completed');
+                    if (i < stepIndex) item.classList.add('completed');
+                    else if (i === stepIndex) item.classList.add('active');
+                });
+            }
+
+            // View-specific animations
+            if (view === 'ai-to-ai') playAItoAIStep(stepIndex);
+            else if (view === 'human-terminal') playHumanTerminalStep(stepIndex);
+            else if (view === 'workspace') playWorkspaceStep(stepIndex);
+        }
+
+        function playAItoAIStep(step) {
+            // Steps: 0=Stuck, 1=Hop, 2=Auth, 3=Route, 4=Sandbox, 5=Solve, 6=Apply
+            resetAllElements();
+            const $ = id => document.getElementById(id);
+
+            // Always show first node (Claude Code)
+            $('ai-node-0').classList.add(step === 0 ? 'active' : 'completed');
+            $('ai-node-0').style.opacity = '1';
+
+            if (step === 0) {
+                $('ai-status-0').textContent = '> stuck...';
+                $('ai-status-0').classList.add('status-yellow');
+            } else if (step === 6) {
+                $('ai-status-0').textContent = '> applied!';
+                $('ai-status-0').classList.remove('status-yellow');
+            } else {
+                $('ai-status-0').textContent = '> waiting';
+                $('ai-status-0').classList.remove('status-yellow');
+            }
+
+            // Step 1: Hop - show HokiPoki node
+            if (step >= 1) {
+                $('ai-node-1').classList.add(step === 1 || step === 2 ? 'active' : 'completed');
+                $('ai-node-1').style.opacity = '1';
+                $('ai-line-1').classList.add(step === 1 ? 'active' : 'completed');
+                $('ai-arrow-1').style.fill = 'var(--neon-cyan)';
+                if (step === 1) {
+                    $('ai-label-request').style.display = 'block';
+                    $('ai-label-request').classList.add('active');
+                    $('ai-status-1').style.display = 'block';
+                    $('ai-auth-status').style.display = 'none';
+                }
+            }
+
+            // Step 2: Auth - show auth status on HokiPoki
+            if (step === 2) {
+                $('ai-status-1').style.display = 'none';
+                $('ai-auth-status').style.display = 'block';
+            }
+
+            // Step 3: Route - show Relay node
+            if (step >= 3) {
+                $('ai-node-2').classList.add(step === 3 ? 'active' : 'completed');
+                $('ai-node-2').style.opacity = '1';
+                $('ai-line-2').classList.add(step === 3 ? 'active' : 'completed');
+                $('ai-arrow-2').style.fill = 'var(--neon-cyan)';
+            }
+
+            // Step 4: Sandbox - show Provider node
+            if (step >= 4) {
+                $('ai-node-3').classList.add(step === 4 ? 'active' : 'completed');
+                $('ai-node-3').style.opacity = '1';
+                $('ai-line-3').classList.add(step === 4 ? 'active' : 'completed');
+                $('ai-arrow-3').style.fill = 'var(--neon-cyan)';
+            }
+
+            // Step 5: Solve - show Gemini CLI node
+            if (step >= 5) {
+                $('ai-node-4').classList.add(step === 5 ? 'active' : 'completed');
+                $('ai-node-4').style.opacity = '1';
+                $('ai-line-4').classList.add(step === 5 ? 'active' : 'completed');
+                $('ai-arrow-4').style.fill = 'var(--neon-cyan)';
+                $('ai-status-4').textContent = step === 5 ? '> solving!' : '> done';
+                if (step === 5) $('ai-status-4').classList.add('status-yellow');
+            }
+
+            // Step 6: Apply - show return path
+            if (step >= 6) {
+                $('ai-return').classList.add('active');
+                $('ai-label-patch').style.display = 'block';
+                $('ai-label-patch').classList.add('active');
+            }
+        }
+
+        function playHumanTerminalStep(step) {
+            // Steps: 0=Request, 1=Auth, 2=Route, 3=Sandbox, 4=Process, 5=Return, 6=Apply
+            resetAllElements();
+            const $ = id => document.getElementById(id);
+
+            // Terminal is always visible
+            $('ht-terminal').style.borderColor = (step === 0 || step === 6) ? 'var(--neon-cyan)' : 'var(--border-color)';
+
+            // Step 1: Auth - show HokiPoki with auth status (already shows > auth by default)
+            if (step >= 1) {
+                $('ht-node-1').classList.add(step === 1 ? 'active' : 'completed');
+                $('ht-node-1').style.opacity = '1';
+                $('ht-line-1').classList.add(step === 1 ? 'active' : 'completed');
+                $('ht-arrow-1').style.fill = 'var(--neon-cyan)';
+            }
+
+            // Step 2: Route - show Relay
+            if (step >= 2) {
+                $('ht-node-2').classList.add(step === 2 ? 'active' : 'completed');
+                $('ht-node-2').style.opacity = '1';
+                $('ht-line-2').classList.add(step === 2 ? 'active' : 'completed');
+                $('ht-arrow-2').style.fill = 'var(--neon-cyan)';
+            }
+
+            // Step 3: Sandbox - show Provider in sandbox
+            if (step >= 3) {
+                $('ht-sandbox').style.opacity = '1';
+                $('ht-node-3').classList.add(step === 3 ? 'active' : 'completed');
+                $('ht-node-3').style.opacity = '1';
+                $('ht-line-3').classList.add(step === 3 ? 'active' : 'completed');
+                $('ht-arrow-3').style.fill = 'var(--neon-cyan)';
+            }
+
+            // Step 4: Process - show Claude CLI
+            if (step >= 4) {
+                $('ht-node-4').classList.add(step === 4 ? 'active' : 'completed');
+                $('ht-node-4').style.opacity = '1';
+                $('ht-line-4').classList.add(step === 4 ? 'active' : 'completed');
+                $('ht-arrow-4').style.fill = 'var(--neon-cyan)';
+                $('ht-status-4').textContent = step === 4 ? '> processing' : '> done';
+            }
+
+            // Step 5: Return - show return path
+            if (step >= 5) {
+                $('ht-return').classList.add('active');
+            }
+
+            // Step 6: Apply - show diff preview and result
+            if (step >= 6) {
+                $('ht-diff').style.display = 'block';
+                $('ht-diff').classList.add('animate-fade-in');
+                $('ht-terminal-result').style.display = 'block';
+            }
+        }
+
+        function playWorkspaceStep(step) {
+            // Steps: 0=Request, 1=Auth, 2=Route, 3=Match, 4=Execute, 5=Return, 6=Success
+            resetAllElements();
+            const $ = id => document.getElementById(id);
+
+            // Update info text
+            const infoTexts = [
+                '// 3 devs need AI, only 2 have subs',
+                '// authenticating with relay',
+                '// requests flow to relay',
+                '// relay matches tasks to providers',
+                '// Alice & Eve process with their CLIs',
+                '// encrypted patches flow back',
+                '// everyone got results - no creds shared!'
+            ];
+            $('ws-info').textContent = infoTexts[step] || infoTexts[0];
+
+            // Requesters always visible
+            ['ws-node-bob', 'ws-node-carol', 'ws-node-dan'].forEach(id => {
+                $(id).style.opacity = '1';
+                $(id).classList.add(step === 0 ? 'active' : 'completed');
+            });
+
+            // Step 1: Auth - show relay with auth status
+            if (step >= 1) {
+                $('ws-node-relay').classList.add(step === 1 ? 'active' : 'completed');
+                $('ws-node-relay').style.opacity = '1';
+                if (step === 1) {
+                    $('ws-relay-status').style.display = 'none';
+                    $('ws-auth-status').style.display = 'block';
+                } else {
+                    $('ws-relay-status').style.display = 'block';
+                    $('ws-auth-status').style.display = 'none';
+                }
+            }
+
+            // Step 2: Route - lines from requesters to relay
+            if (step >= 2) {
+                ['ws-line-bob', 'ws-line-carol', 'ws-line-dan'].forEach(id => {
+                    $(id).classList.add(step === 2 ? 'active' : 'completed');
+                });
+                $('ws-node-relay').classList.add(step === 2 || step === 3 ? 'active' : 'completed');
+            }
+
+            // Step 3: Match - lines from relay to providers
+            if (step >= 3) {
+                ['ws-line-alice', 'ws-line-eve'].forEach(id => {
+                    $(id).classList.add(step === 3 ? 'active' : 'completed');
+                });
+            }
+
+            // Step 4: Execute - providers process
+            if (step >= 4) {
+                $('ws-node-alice').classList.add(step === 4 ? 'active' : 'completed');
+                $('ws-node-eve').classList.add(step === 4 ? 'active' : 'completed');
+                $('ws-alice-status').textContent = step === 4 ? 'processing...' : 'CLAUDE CLI';
+                $('ws-eve-status').textContent = step === 4 ? 'processing...' : 'GEMINI CLI';
+            }
+
+            // Step 5: Return - return paths
+            if (step >= 5) {
+                ['ws-return-1', 'ws-return-2', 'ws-return-3'].forEach(id => {
+                    $(id).classList.add('active');
+                });
+            }
+
+            // Step 6: Success - show results
+            if (step >= 6) {
+                ['ws-bob-result', 'ws-carol-result', 'ws-dan-result'].forEach(id => {
+                    $(id).style.display = 'block';
+                });
+            }
+        }
+
+        function nextStep() {
+            const numSteps = viewConfigs[diagramState.currentView].steps;
+            let next = diagramState.currentStep + 1;
+            if (next >= numSteps) next = 0;
+            playStep(next);
+            if (diagramState.isPlaying) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        }
+
+        function togglePlayPause() {
+            const btn = document.getElementById('diagram-play-pause');
+            if (diagramState.isPlaying) {
+                stopAutoPlay();
+                btn.textContent = 'Play';
+            } else {
+                startAutoPlay();
+                btn.textContent = 'Pause';
+            }
+            diagramState.isPlaying = !diagramState.isPlaying;
+        }
+
+        function startAutoPlay() {
+            if (diagramState.intervalId) return;
+
+            diagramState.intervalId = setInterval(() => {
+                const numSteps = viewConfigs[diagramState.currentView].steps;
+                let nextStep = diagramState.currentStep + 1;
+                if (nextStep >= numSteps) nextStep = 0;
+                playStep(nextStep);
+            }, diagramState.stepDuration);
+        }
+
+        function stopAutoPlay() {
+            if (diagramState.intervalId) {
+                clearInterval(diagramState.intervalId);
+                diagramState.intervalId = null;
+            }
+        }
+
+        function restartAnimation() {
+            playStep(0);
+            if (!diagramState.isPlaying) {
+                diagramState.isPlaying = true;
+                document.getElementById('diagram-play-pause').textContent = 'Pause';
+            }
+            stopAutoPlay();
+            startAutoPlay();
+        }
+
+        // Initialize diagram when DOM is ready
+        document.addEventListener('DOMContentLoaded', initDiagram);
     </script>
 </body>
 </html>
