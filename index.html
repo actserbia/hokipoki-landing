@@ -1321,6 +1321,16 @@
                         <button class="copy-btn" onclick="copyCommand(this, 'hokipoki listen --tools claude codex gemini')">Copy</button>
                     </div>
 
+                    <div class="command-block">
+                        <div><span class="step-num">4.</span><code>hokipoki request \<br>&nbsp;&nbsp;--tool claude \<br>&nbsp;&nbsp;--task "Fix the bug" \<br>&nbsp;&nbsp;--files src/auth.ts</code></div>
+                        <button class="copy-btn" onclick="copyCommand(this, 'hokipoki request --tool claude --task &quot;Fix the bug&quot; --files src/auth.ts')">Copy</button>
+                    </div>
+
+                    <div class="command-block">
+                        <div><span class="step-num">5.</span><code>hokipoki request \<br>&nbsp;&nbsp;--tool claude \<br>&nbsp;&nbsp;--task "Fix the bug" \<br>&nbsp;&nbsp;--files src/auth.ts \<br>&nbsp;&nbsp;--workspace next-halo</code></div>
+                        <button class="copy-btn" onclick="copyCommand(this, 'hokipoki request --tool claude --task &quot;Fix the bug&quot; --files src/auth.ts --workspace next-halo')">Copy</button>
+                    </div>
+
                     <p style="font-size: 0.7rem; color: var(--txt-muted); margin-top: 0.75rem; font-style: italic;">
                         * Use only the tools you have access to (e.g., --tools claude or --tools codex gemini)
                     </p>
@@ -1369,7 +1379,7 @@
             <div class="diagram-wrapper">
                 <!-- Tab Navigation -->
                 <div class="diagram-tabs">
-                    <button class="diagram-tab active" data-view="ai-to-ai">AI-to-AI</button>
+                    <button class="diagram-tab active" data-view="ai-to-ai">AI CLI - TO - AI CLI</button>
                     <button class="diagram-tab" data-view="human-terminal">Human Terminal</button>
                     <button class="diagram-tab" data-view="workspace">Workspace Sharing</button>
                 </div>
@@ -1383,48 +1393,48 @@
 
                     <!-- AI-to-AI View -->
                     <div class="diagram-view active" id="view-ai-to-ai">
-                        <div class="diagram-canvas">
-                            <svg class="diagram-svg" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid meet">
-                                <!-- Forward lines: connect right edge of one node to left edge of next (centered +60px) -->
-                                <line id="ai-line-1" class="diagram-line" x1="160" y1="70" x2="195" y2="70"/>
-                                <polygon id="ai-arrow-1" class="diagram-arrow-head" points="190,65 200,70 190,75" fill="var(--border-color)"/>
-                                <line id="ai-line-2" class="diagram-line" x1="300" y1="70" x2="335" y2="70"/>
-                                <polygon id="ai-arrow-2" class="diagram-arrow-head" points="330,65 340,70 330,75" fill="var(--border-color)"/>
-                                <line id="ai-line-3" class="diagram-line" x1="440" y1="70" x2="475" y2="70"/>
-                                <polygon id="ai-arrow-3" class="diagram-arrow-head" points="470,65 480,70 470,75" fill="var(--border-color)"/>
-                                <line id="ai-line-4" class="diagram-line" x1="580" y1="70" x2="615" y2="70"/>
-                                <polygon id="ai-arrow-4" class="diagram-arrow-head" points="610,65 620,70 610,75" fill="var(--border-color)"/>
+                        <div class="diagram-canvas" style="height: 420px;">
+                            <svg class="diagram-svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet">
+                                <!-- Forward lines: connect right edge of one node to left edge of next (centered vertically at y=180) -->
+                                <line id="ai-line-1" class="diagram-line" x1="160" y1="180" x2="195" y2="180"/>
+                                <polygon id="ai-arrow-1" class="diagram-arrow-head" points="190,175 200,180 190,185" fill="var(--border-color)"/>
+                                <line id="ai-line-2" class="diagram-line" x1="300" y1="180" x2="335" y2="180"/>
+                                <polygon id="ai-arrow-2" class="diagram-arrow-head" points="330,175 340,180 330,185" fill="var(--border-color)"/>
+                                <line id="ai-line-3" class="diagram-line" x1="440" y1="180" x2="475" y2="180"/>
+                                <polygon id="ai-arrow-3" class="diagram-arrow-head" points="470,175 480,180 470,185" fill="var(--border-color)"/>
+                                <line id="ai-line-4" class="diagram-line" x1="580" y1="180" x2="615" y2="180"/>
+                                <polygon id="ai-arrow-4" class="diagram-arrow-head" points="610,175 620,180 610,185" fill="var(--border-color)"/>
                                 <!-- Return path: curves below all nodes -->
-                                <path id="ai-return" class="diagram-line return-path" d="M 720 110 L 720 220 L 60 220 L 60 110" fill="none"/>
+                                <path id="ai-return" class="diagram-line return-path" d="M 720 220 L 720 380 L 60 380 L 60 220" fill="none"/>
                             </svg>
 
-                            <!-- Nodes: centered in 800px canvas -->
-                            <div class="diagram-node" id="ai-node-0" style="left: 60px; top: 40px; width: 100px;">
+                            <!-- Nodes: centered in 800px canvas, vertically centered -->
+                            <div class="diagram-node" id="ai-node-0" style="left: 60px; top: 150px; width: 100px;">
                                 <div class="diagram-node-header">Claude Code</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status" id="ai-status-0">> waiting</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ai-node-1" style="left: 200px; top: 40px; width: 100px;">
+                            <div class="diagram-node" id="ai-node-1" style="left: 200px; top: 150px; width: 100px;">
                                 <div class="diagram-node-header">HokiPoki</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status" id="ai-status-1">> hop</div>
                                     <div class="diagram-node-status" id="ai-auth-status" style="display: none;">> auth</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ai-node-2" style="left: 340px; top: 40px; width: 100px;">
+                            <div class="diagram-node" id="ai-node-2" style="left: 340px; top: 150px; width: 100px;">
                                 <div class="diagram-node-header">[Relay]</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status">> routing</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ai-node-3" style="left: 480px; top: 40px; width: 100px;">
+                            <div class="diagram-node" id="ai-node-3" style="left: 480px; top: 150px; width: 100px;">
                                 <div class="diagram-node-header">Provider</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status">> sandbox</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ai-node-4" style="left: 620px; top: 40px; width: 100px;">
+                            <div class="diagram-node" id="ai-node-4" style="left: 620px; top: 150px; width: 100px;">
                                 <div class="diagram-node-header">Gemini CLI</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status" id="ai-status-4">> ready</div>
@@ -1432,8 +1442,8 @@
                             </div>
 
                             <!-- Floating labels -->
-                            <div class="diagram-return-label" id="ai-label-request" style="left: 170px; top: 15px; display: none;">[REQUEST]</div>
-                            <div class="diagram-return-label" id="ai-label-patch" style="left: 370px; top: 195px; display: none;">[PATCH]</div>
+                            <div class="diagram-return-label" id="ai-label-request" style="left: 170px; top: 125px; display: none;">[REQUEST]</div>
+                            <div class="diagram-return-label" id="ai-label-patch" style="left: 370px; top: 355px; display: none;">[PATCH]</div>
                         </div>
 
                         <!-- Step bar -->
@@ -1450,21 +1460,21 @@
 
                     <!-- Human Terminal View -->
                     <div class="diagram-view" id="view-human-terminal">
-                        <div class="diagram-canvas" style="height: 320px;">
-                            <svg class="diagram-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
-                                <!-- Vertical flow: Terminal (bottom ~110) → HokiPoki (top 140) → Relay (top 220) (centered +95px) -->
-                                <line id="ht-line-1" class="diagram-line" x1="195" y1="115" x2="195" y2="135"/>
-                                <polygon id="ht-arrow-1" class="diagram-arrow-head" points="190,130 195,140 200,130" fill="var(--border-color)"/>
-                                <line id="ht-line-2" class="diagram-line" x1="195" y1="195" x2="195" y2="215"/>
-                                <polygon id="ht-arrow-2" class="diagram-arrow-head" points="190,210 195,220 200,210" fill="var(--border-color)"/>
-                                <!-- Horizontal from Relay right edge (255) to Sandbox left edge (375) -->
-                                <line id="ht-line-3" class="diagram-line" x1="255" y1="255" x2="370" y2="255"/>
-                                <polygon id="ht-arrow-3" class="diagram-arrow-head" points="365,250 375,255 365,260" fill="var(--border-color)"/>
-                                <!-- From Sandbox right edge (515) to Claude CLI left edge (595) -->
-                                <line id="ht-line-4" class="diagram-line" x1="515" y1="255" x2="590" y2="255"/>
-                                <polygon id="ht-arrow-4" class="diagram-arrow-head" points="585,250 595,255 585,260" fill="var(--border-color)"/>
+                        <div class="diagram-canvas" style="height: 420px;">
+                            <svg class="diagram-svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet">
+                                <!-- Vertical flow: Terminal → HokiPoki → Relay -->
+                                <line id="ht-line-1" class="diagram-line" x1="195" y1="120" x2="195" y2="155"/>
+                                <polygon id="ht-arrow-1" class="diagram-arrow-head" points="190,150 195,160 200,150" fill="var(--border-color)"/>
+                                <line id="ht-line-2" class="diagram-line" x1="195" y1="220" x2="195" y2="255"/>
+                                <polygon id="ht-arrow-2" class="diagram-arrow-head" points="190,250 195,260 200,250" fill="var(--border-color)"/>
+                                <!-- Horizontal from Relay right edge to Sandbox left edge (y=295 = center of boxes) -->
+                                <line id="ht-line-3" class="diagram-line" x1="255" y1="295" x2="370" y2="295"/>
+                                <polygon id="ht-arrow-3" class="diagram-arrow-head" points="365,290 375,295 365,300" fill="var(--border-color)"/>
+                                <!-- From Sandbox right edge to Claude CLI left edge -->
+                                <line id="ht-line-4" class="diagram-line" x1="515" y1="295" x2="590" y2="295"/>
+                                <polygon id="ht-arrow-4" class="diagram-arrow-head" points="585,290 595,295 585,300" fill="var(--border-color)"/>
                                 <!-- Return path: from Claude CLI bottom → below → back to terminal left side -->
-                                <path id="ht-return" class="diagram-line return-path" d="M 705 295 L 705 310 L 105 310 L 105 65 L 115 65" fill="none"/>
+                                <path id="ht-return" class="diagram-line return-path" d="M 705 335 L 705 400 L 105 400 L 105 65 L 115 65" fill="none"/>
                             </svg>
 
                             <!-- Terminal: centered +95px -->
@@ -1479,7 +1489,7 @@
                             </div>
 
                             <!-- HokiPoki node: centered +95px -->
-                            <div class="diagram-node" id="ht-node-1" style="left: 135px; top: 140px; width: 120px;">
+                            <div class="diagram-node" id="ht-node-1" style="left: 135px; top: 160px; width: 120px;">
                                 <div class="diagram-node-header">HokiPoki</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status">> auth</div>
@@ -1487,7 +1497,7 @@
                             </div>
 
                             <!-- Relay node: centered +95px -->
-                            <div class="diagram-node" id="ht-node-2" style="left: 135px; top: 220px; width: 120px;">
+                            <div class="diagram-node" id="ht-node-2" style="left: 135px; top: 260px; width: 120px;">
                                 <div class="diagram-node-header">[Relay]</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status">> routing</div>
@@ -1495,7 +1505,7 @@
                             </div>
 
                             <!-- Sandbox + Provider: centered +95px -->
-                            <div class="diagram-sandbox" id="ht-sandbox" style="position: absolute; left: 375px; top: 220px;">
+                            <div class="diagram-sandbox" id="ht-sandbox" style="position: absolute; left: 375px; top: 260px;">
                                 <div class="diagram-sandbox-label">[SANDBOX]</div>
                                 <div class="diagram-node" id="ht-node-3" style="position: relative; left: 0; top: 0; width: 110px;">
                                     <div class="diagram-node-header">Provider</div>
@@ -1506,7 +1516,7 @@
                             </div>
 
                             <!-- Claude CLI: centered +95px -->
-                            <div class="diagram-node" id="ht-node-4" style="left: 595px; top: 230px; width: 110px;">
+                            <div class="diagram-node" id="ht-node-4" style="left: 595px; top: 270px; width: 110px;">
                                 <div class="diagram-node-header">Claude CLI</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status" id="ht-status-4">> ready</div>
@@ -1541,37 +1551,37 @@
 
                     <!-- Workspace Sharing View -->
                     <div class="diagram-view" id="view-workspace">
-                        <div class="diagram-canvas" style="height: 320px;">
-                            <svg class="diagram-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
-                                <!-- Lines from requesters to relay: connect right edge to left edge (centered +50px) -->
-                                <line id="ws-line-bob" class="diagram-line" x1="180" y1="55" x2="340" y2="145"/>
-                                <line id="ws-line-carol" class="diagram-line" x1="180" y1="135" x2="340" y2="155"/>
-                                <line id="ws-line-dan" class="diagram-line" x1="180" y1="215" x2="340" y2="165"/>
+                        <div class="diagram-canvas" style="height: 420px;">
+                            <svg class="diagram-svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet">
+                                <!-- Lines from requesters to relay: connect right edge to left edge (shifted down +50px) -->
+                                <line id="ws-line-bob" class="diagram-line" x1="180" y1="105" x2="340" y2="195"/>
+                                <line id="ws-line-carol" class="diagram-line" x1="180" y1="185" x2="340" y2="205"/>
+                                <line id="ws-line-dan" class="diagram-line" x1="180" y1="265" x2="340" y2="215"/>
                                 <!-- Lines from relay to providers: connect right edge to left edge -->
-                                <line id="ws-line-alice" class="diagram-line" x1="460" y1="145" x2="570" y2="65"/>
-                                <line id="ws-line-eve" class="diagram-line" x1="460" y1="165" x2="570" y2="185"/>
-                                <!-- Return paths: curve BELOW the diagram (via y=280-300) -->
-                                <path id="ws-return-1" class="diagram-line return-path" d="M 700 90 L 720 90 L 720 285 L 60 285 L 60 55 L 70 55" fill="none"/>
-                                <path id="ws-return-2" class="diagram-line return-path" d="M 700 200 L 730 200 L 730 295 L 55 295 L 55 135 L 70 135" fill="none"/>
-                                <path id="ws-return-3" class="diagram-line return-path" d="M 700 210 L 740 210 L 740 305 L 50 305 L 50 215 L 70 215" fill="none"/>
+                                <line id="ws-line-alice" class="diagram-line" x1="460" y1="195" x2="570" y2="115"/>
+                                <line id="ws-line-eve" class="diagram-line" x1="460" y1="215" x2="570" y2="235"/>
+                                <!-- Return paths: curve BELOW the diagram (via y=380-400) -->
+                                <path id="ws-return-1" class="diagram-line return-path" d="M 700 140 L 720 140 L 720 385 L 60 385 L 60 105 L 70 105" fill="none"/>
+                                <path id="ws-return-2" class="diagram-line return-path" d="M 700 250 L 730 250 L 730 395 L 55 395 L 55 185 L 70 185" fill="none"/>
+                                <path id="ws-return-3" class="diagram-line return-path" d="M 700 260 L 740 260 L 740 405 L 50 405 L 50 265 L 70 265" fill="none"/>
                             </svg>
 
-                            <!-- Requesters (left) - centered +50px -->
-                            <div class="diagram-node" id="ws-node-bob" style="left: 70px; top: 30px; width: 110px;">
+                            <!-- Requesters (left) - shifted down +50px -->
+                            <div class="diagram-node" id="ws-node-bob" style="left: 70px; top: 80px; width: 110px;">
                                 <div class="diagram-node-header">Bob</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status status-red">no sub</div>
                                     <div class="diagram-node-status" id="ws-bob-result" style="display: none;">> got it!</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ws-node-carol" style="left: 70px; top: 110px; width: 110px;">
+                            <div class="diagram-node" id="ws-node-carol" style="left: 70px; top: 160px; width: 110px;">
                                 <div class="diagram-node-header">Carol</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status status-red">no sub</div>
                                     <div class="diagram-node-status" id="ws-carol-result" style="display: none;">> got it!</div>
                                 </div>
                             </div>
-                            <div class="diagram-node" id="ws-node-dan" style="left: 70px; top: 190px; width: 110px;">
+                            <div class="diagram-node" id="ws-node-dan" style="left: 70px; top: 240px; width: 110px;">
                                 <div class="diagram-node-header">Dan</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status status-red">no sub</div>
@@ -1579,8 +1589,8 @@
                                 </div>
                             </div>
 
-                            <!-- Relay (center) -->
-                            <div class="diagram-node" id="ws-node-relay" style="left: 340px; top: 120px; width: 120px;">
+                            <!-- Relay (center) - shifted down +50px -->
+                            <div class="diagram-node" id="ws-node-relay" style="left: 340px; top: 170px; width: 120px;">
                                 <div class="diagram-node-header">[Relay]</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status" id="ws-relay-status">> conductor</div>
@@ -1589,15 +1599,15 @@
                                 </div>
                             </div>
 
-                            <!-- Providers (right) - centered (already at 570) -->
-                            <div class="diagram-node highlight-yellow" id="ws-node-alice" style="left: 570px; top: 30px; width: 130px;">
+                            <!-- Providers (right) - shifted down +50px -->
+                            <div class="diagram-node highlight-yellow" id="ws-node-alice" style="left: 570px; top: 80px; width: 130px;">
                                 <div class="diagram-node-header">Alice</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status status-yellow">CLAUDE MAX</div>
                                     <div class="diagram-node-status" id="ws-alice-status">CLAUDE CLI</div>
                                 </div>
                             </div>
-                            <div class="diagram-node highlight-yellow" id="ws-node-eve" style="left: 570px; top: 150px; width: 130px;">
+                            <div class="diagram-node highlight-yellow" id="ws-node-eve" style="left: 570px; top: 200px; width: 130px;">
                                 <div class="diagram-node-header">Eve</div>
                                 <div class="diagram-node-body">
                                     <div class="diagram-node-status status-yellow">GEMINI PRO</div>
@@ -1606,7 +1616,7 @@
                             </div>
 
                             <!-- Info text -->
-                            <div class="diagram-return-label" id="ws-info" style="left: 280px; top: 5px;">// 3 devs need AI, only 2 have subs</div>
+                            <div class="diagram-return-label" id="ws-info" style="left: 280px; top: 55px;">// authenticating with relay</div>
                         </div>
 
                         <!-- Legend -->
